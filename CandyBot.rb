@@ -1,4 +1,4 @@
-﻿# frozen_string_literal: true
+# frozen_string_literal: true
 require 'discordrb'
 
 bot = Discordrb::Commands::CommandBot.new token: 'NTQ5MTQyOTM4MjA3Mzg3NjQ4.D1PlEw.irnIaTF_j3nGLGaaGovytAQQ_Ss', prefix: 'c!'
@@ -93,4 +93,8 @@ bot.command(:glittertrivia, description: 'Send a random fact about Glitter Force
     else
     end
 
+<<<<<<< HEAD
 bot.run
+=======
+bot.run
+>>>>>>> f18f80a8716bb1f0f19cad62d3660ac0cdcab19d
