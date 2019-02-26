@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'discordrb'
+require 'yaml'
 
 bot_token = ENV['BOT_TOKEN'] || File.open('Key.conf', 'r').read.to_s
 
