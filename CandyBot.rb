@@ -76,32 +76,10 @@ bot.command(:coin, description: 'Flip a two-sided coin') do |_event|
 end
 
 bot.command(:glittertrivia, description: 'Send a random fact about Glitter Force') do |event|
-    fact = [rand(8) + 1].to_i
-    if (fact == 1)
-        event << "**Fact #1:**"
-        event << "In Japan, Glitter Force is called *Smile PreCure!*"
-    elsif (fact == 2)
-        event << "**Fact #2:**"
-        event << "Glitter Force was given a sequel, *Glitter Force Doki Doki*."
-    elsif (fact == 3)
-        event << "**Fact #3:**"
-        event << "When Glitter Force was dubbed in English, 8 of the 48 episodes were removed. This is mostly due to cultural differences."
-    elsif (fact == 4)
-        event << "**Fact #4:**"
-        event << "Glitter Force was not only an anime, but a manga, video game and a short film."
-    elsif (fact == 5)
-        event << "**Fact #5:**"
-        event << "Glitter Force was a sequel to the anime \'Pretty Cure\'. However, it was never dubbed in English."
-    elsif (fact == 6)
-        event << "**Fact #6:**"
-        event << "The director of Glitter Force, Takashi Otsuka, also worked on Highschool DXD and the Fullmetal Alchemist film."
-    elsif (fact == 7)
-        event << "**Fact #7:**"
-        event << "Brute, one of the villians in Glitter Force, is based off of Onis, which are basically Japanese trolls."
-    elsif (fact == 8)
-        event << "**Fact #8:**"
-        event << "The world of Glitter Force is based on fairy tales. This is shown with examples such as one of the villians being a *big bad wolf*, and the main characters love of all fairy tales."
-    end
+    facts = YAML.load(File.open('Config.conf', 'r').read)['Facts']
+    fact_id = rand(facts.length).to_i
+    event << "**Fact #" + fact_id.to_s + ":**"
+    event << facts[fact_id]
 end
 
 bot.run
