@@ -82,6 +82,17 @@ bot.command(:glittertrivia, description: 'Send a random fact about Glitter Force
     event << facts[fact_id]
 end
 
-bot.run
+
+bot.run true
+STARTUP = YAML.load(File.open('Config.conf', 'r').read)['startup']
+
+bot.update_status('online', STARTUP['Status'], nil)
+
+for each in BOT_ADMINS 
+    bot.send_temporary_message(bot.users[each].pm, STARTUP['Message'], STARTUP['Time'])
+end
+
+bot.join
+
 
 
