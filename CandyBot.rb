@@ -57,7 +57,7 @@ end
 
 bot.command(:roll, description: 'Roll a dice of any value') do |_event, *args|
     return 'You can only roll a one or above' unless args[0].to_i >= 1
-    return 'You rolled a ' + (rand((args[0]||6).to_i) + 1).to_s
+    return 'You rolled ' + (rand((args[0]||6).to_i) + 1).to_s
 end
 
 bot.command(:coin, description: 'Flip a two-sided coin') do |_event|
@@ -65,7 +65,7 @@ bot.command(:coin, description: 'Flip a two-sided coin') do |_event|
 end
 
 bot.command(:glittertrivia, description: 'Send a random fact about Glitter Force') do |event|
-    fact = [rand(8) + 1].to_i
+    fact = (rand(8) + 1).to_i
     if (fact == 1)
         event << "**Fact #1:**"
         event << "In Japan, Glitter Force is called *Smile PreCure!*"
@@ -90,11 +90,7 @@ bot.command(:glittertrivia, description: 'Send a random fact about Glitter Force
     elsif (fact == 8)
         event << "**Fact #8:**"
         event << "The world of Glitter Force is based on fairy tales. This is shown with examples such as one of the villians being a *big bad wolf*, and the main characters love of all fairy tales."
-    else
     end
+end
 
-<<<<<<< HEAD
 bot.run
-=======
-bot.run
->>>>>>> f18f80a8716bb1f0f19cad62d3660ac0cdcab19d
