@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'discordrb'
+require 'yaml'
 
 bot_token = ENV['BOT_TOKEN'] || File.open('Key.conf', 'r').read.to_s
 
@@ -68,7 +69,7 @@ end
 
 bot.command(:roll, description: 'Roll a dice of any value') do |_event, *args|
     return 'You can only roll a one or above' unless args[0].to_i >= 1
-    return 'You rolled a ' + (rand((args[0]||6).to_i) + 1).to_s
+    return 'You rolled ' + (rand((args[0]||6).to_i) + 1).to_s
 end
 
 bot.command(:coin, description: 'Flip a two-sided coin') do |_event|
