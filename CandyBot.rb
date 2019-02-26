@@ -78,7 +78,7 @@ end
 bot.command(:glittertrivia, description: 'Send a random fact about Glitter Force') do |event|
     facts = YAML.load(File.open('Config.conf', 'r').read)['Facts']
     fact_id = rand(facts.length).to_i
-    event << "**Fact #" + fact_id.to_s + ":**"
+    event << "**Fact ##{fact_id.to_s}:**"
     event << facts[fact_id]
 end
 
