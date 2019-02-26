@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'discordrb'
 
+
 bot = Discordrb::Commands::CommandBot.new token: 'NTQ5MTQyOTM4MjA3Mzg3NjQ4.D1PlEw.irnIaTF_j3nGLGaaGovytAQQ_Ss', prefix: 'c!'
 
 puts "This bot's invite URL is: #{bot.invite_url}"
