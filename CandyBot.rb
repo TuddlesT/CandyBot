@@ -1,18 +1,29 @@
 # frozen_string_literal: true
 require 'discordrb'
 
-bot = Discordrb::Commands::CommandBot.new token: 'NTQ5MTQyOTM4MjA3Mzg3NjQ4.D1PlEw.irnIaTF_j3nGLGaaGovytAQQ_Ss', prefix: 'c!'
+bot_token = ENV['BOT_TOKEN'] || File.open('Key.conf', 'r').read.to_s
+
+bot = Discordrb::Commands::CommandBot.new token: bot_token, prefix: 'c!'
 
 puts "This bot's invite URL is: #{bot.invite_url}"
 
+
+
+BOT_ADMINS = YAML.load(File.open('Config.conf', 'r').read)['Admins']
+
+def is_admin (user)
+    return BOT_ADMINS.include? user
+end
+
+
 bot.command(:eval, help_available: false) do |event, *args|
-    break unless event.user.id == (142890642140299264 || 109792060256616448)
+    break unless is_admin(event.user)
 
     eval args.join(' ')
 end
 
 bot.command(:status, help_available: false) do |event, *args|
-    break unless event.user.id == (142890642140299264 || 109792060256616448)
+    break unless is_admin(event.user)
 
     bot.update_status('online', args.join(' '), nil)
 end
