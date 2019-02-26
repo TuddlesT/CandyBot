@@ -1,19 +1,29 @@
 # frozen_string_literal: true
 require 'discordrb'
 
+bot_token = ENV['BOT_TOKEN'] || File.open('Key.conf', 'r').read.to_s
 
-bot = Discordrb::Commands::CommandBot.new token: 'NTQ5MTQyOTM4MjA3Mzg3NjQ4.D1PlEw.irnIaTF_j3nGLGaaGovytAQQ_Ss', prefix: 'c!'
+bot = Discordrb::Commands::CommandBot.new token: bot_token, prefix: 'c!'
 
 puts "This bot's invite URL is: #{bot.invite_url}"
 
+
+
+BOT_ADMINS = YAML.load(File.open('Config.conf', 'r').read)['Admins']
+
+def is_admin (user)
+    return BOT_ADMINS.include? user
+end
+
+
 bot.command(:eval, help_available: false) do |event, *args|
-    break unless event.user.id == (142890642140299264 || 109792060256616448)
+    break unless is_admin(event.user)
 
     eval args.join(' ')
 end
 
 bot.command(:status, help_available: false) do |event, *args|
-    break unless event.user.id == (142890642140299264 || 109792060256616448)
+    break unless is_admin(event.user)
 
     bot.update_status('online', args.join(' '), nil)
 end
@@ -91,11 +101,9 @@ bot.command(:glittertrivia, description: 'Send a random fact about Glitter Force
     elsif (fact == 8)
         event << "**Fact #8:**"
         event << "The world of Glitter Force is based on fairy tales. This is shown with examples such as one of the villians being a *big bad wolf*, and the main characters love of all fairy tales."
-    else
     end
+end
 
-<<<<<<< HEAD
 bot.run
-=======
-bot.run
->>>>>>> f18f80a8716bb1f0f19cad62d3660ac0cdcab19d
+
+
