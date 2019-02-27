@@ -34,37 +34,16 @@ bot.command(:test, description: 'To test if I\'m working') do |_event|
 end
 
 bot.command(:rps, description: 'Play Rock, Paper, Scissors with me!') do |event, *args|
-    playerRPS = args[0].downcase
-    botRPS = ["rock", "paper", "scissors"][rand(3)]
-    event << "I chose " + botRPS + "!"
-    if (playerRPS=='rock')
-        if (botRPS=='rock')
-            event << "That's a draw!"
-        elsif (botRPS=='paper')
-            event << "I win!"
-        else
-            event << "You win!"
-        end
-    elsif (playerRPS=='paper')
-        if (botRPS=='rock')
-            event << "You win!!"
-        elsif (botRPS=='paper')
-            event << "That's a draw!"
-        else
-            event << "I win!"
-        end
-    elsif (playerRPS=="scissors")
-        if (botRPS=='rock')
-            event << "I win!"
-        elsif (botRPS=='paper')
-            event << "You win!"
-        else
-            event << "That's a draw!"
-        end
-    else
-        event << "But I am unsure what option you chose"
-        event << "Please chose Rock, Paper or Scissors!"
+    bot_int = rand(3)
+    event << "I chose #{['rock', 'paper', 'scissors'][bot_int]}!"
+
+    player_int = {'rock' => 0, 'r' => 0, 'paper' => 1, 'p' => 1, 'scissors' => 2, 's' => 2}[player_choice.to_s.downcase]
+    if player_int = nil
+        event << 'But I am unsure what option you chose'
+        return 'Please chose Rock, Paper or Scissors! (or R, P or S)'
     end
+
+    ['That\'s a draw!', 'You Win!', 'I win!'][(bot_int - player_int) % 3]
 end
 
 bot.command(:roll, description: 'Roll a dice of any value') do |_event, *args|
